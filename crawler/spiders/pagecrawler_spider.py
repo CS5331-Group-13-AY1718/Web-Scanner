@@ -1,5 +1,6 @@
 import scrapy
-import urlparse
+from urlparse import urlparse
+from crawler.items import *
 
 class LinkCrawlerSpider(scrapy.Spider):
 	name = "linkcrawler"
@@ -16,7 +17,7 @@ class LinkCrawlerSpider(scrapy.Spider):
 		forms = response.css('form')
 		for form in forms:
 			formItem = FormItem()
-			self.createFormItem(item, response.url, form)
+			self.createFormItem(formItem, response.url, form)
 			yield formItem
 			
 		# visit links in current page
@@ -60,8 +61,20 @@ class LinkCrawlerSpider(scrapy.Spider):
 		item['method'] = form_action
 		
 		inputs = form.css('input')
+		item['inputs'] = []
 		for input in inputs:
-			item['inputs']['type'] = input.css('attr(type)').extract_first()
-			item['inputs']['name'] = input.css('attr(name)').extract_first()
-			
-		
+			input_dict = {}
+			input_type = input.css('::attr(type)').extract_first()
+			if input_type is None:
+				input_type = ''
+			input_dict['type'] = input_type
+			input_name = input.css('::attr(name)').extract_first()
+			if input_name is None:
+				input_name = ''
+			input_dict['name'] = input_name
+			input_value = input.css('::attr(value)').extract_first()
+			if input_value is None:
+				input_value = ''
+			input_dict['value'] = input_value
+			item['inputs'].append(input_dict)
+

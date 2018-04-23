@@ -1,11 +1,12 @@
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from crawler.spiders import linkcrawlerspider
-from twisted.internet import reactor
 from urlparse import urlparse
+from plugins import *
 import argparse
 import scrapy
 import os.path
+import json
 		
 def crawl(urls):
 	if os.path.isfile(urls):
@@ -21,6 +22,18 @@ def crawl(urls):
 start_urls=[url], allowed_domains = [domain_name])
 	process.start()
 
+def scan(targets):
+	sqli_vuln = []
+	csrf_vuln = []
+	or_vuln = []
+	sqli_vuln = []
+	ssci_vuln = []
+	dt_vuln = {}
+	
+	with open(targets) as f:
+		for line in f:
+			url = json.loads(line)
+			dt(url).scan()
 	
 
 if __name__ == "__main__":

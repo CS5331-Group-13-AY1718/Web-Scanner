@@ -2,7 +2,7 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from crawler.spiders import linkcrawlerspider
 from urlparse import urlparse
-from plugins import *
+from plugins import dirt, ci
 import argparse
 import scrapy
 import os.path
@@ -33,7 +33,8 @@ def scan(targets):
 	with open(targets) as f:
 		for line in f:
 			url = json.loads(line)
-			dt(url).scan()
+			dirt.DirectoryTraversal(url).scan()
+			ci.CommandInjection(url).scan()
 	
 
 if __name__ == "__main__":
@@ -45,3 +46,5 @@ if __name__ == "__main__":
 		argparser.error('No arguments provided, please choose an operation.')
 	if args.url:
 		crawl(args.url)
+	if args.targets:
+		scan(args.targets)

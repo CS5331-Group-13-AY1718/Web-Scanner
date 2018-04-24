@@ -20,7 +20,11 @@ class URLItem(scrapy.Item):
 class FormItem(scrapy.Item):
 	form_id = scrapy.Field()
 	url = scrapy.Field()
+	domain = scrapy.Field()
+	scheme = scrapy.Field()
+	path = scrapy.Field()
 	inputs = scrapy.Field()
 	method = scrapy.Field()
 	action = scrapy.Field()
+	query = scrapy.Field()
 	

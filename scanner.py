@@ -22,6 +22,9 @@ def crawl(urls):
 start_urls=[url], allowed_domains = [domain_name])
 	process.start()
 
+	
+def generate_json_report(results)	
+
 def scan(targets):
 	sqli_vuln = []
 	csrf_vuln = []
@@ -33,9 +36,10 @@ def scan(targets):
 	with open(targets) as f:
 		for line in f:
 			url = json.loads(line)
-			dirt.DirectoryTraversal(url).scan()
-			ci.CommandInjection(url).scan()
+			dt_results = dirt.DirectoryTraversal(url).scan()
+			ci_results = ci.CommandInjection(url).scan()
 	
+	results = (dt_results, ci_results)
 
 if __name__ == "__main__":
 	argparser = argparse.ArgumentParser()

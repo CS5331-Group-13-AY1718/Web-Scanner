@@ -18,8 +18,8 @@ class URLPipeline(object):
 		self.filename = settings.get('filename')
 
 	def open_spider(self, spider):
-		file_name = self.filename + '_urls.json'
-		self.file = open(file_name, 'w')
+		file_name = self.filename + '.json'
+		self.file = open(file_name, 'a')
 		self.urls = set()
 		
 	def close_spider(self, spider):
@@ -47,8 +47,8 @@ class FormPipeline(object):
 		self.filename = settings.get('filename')
 		
 	def open_spider(self, spider):
-		file_name = self.filename + '_forms.json'
-		self.file = open(file_name, 'w')
+		file_name = self.filename + '.json'
+		self.file = open(file_name, 'a')
 		self.forms = set()
 		
 	def close_spider(self, spider):

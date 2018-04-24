@@ -43,20 +43,15 @@ class DirectoryTraversal(object):
 			return None
 			
 	def add_scan_results():
-		if not self.results:
-			self.results['class'] = "Directory Traversal"
-			self.results['results'] = {}
-		
 		domain = self.partial_path
+		if domain not in self.results:
+			self.results[domain] = []
+
 		result = {}
 		result['endpoint'] = self.path
 		result['params'] = self.exploit_param
 		result['method'] = self.method
-		if domain in self.results['results']:
-			self.results[results][domain].append(result)
-		else:
-			self.results[results][domain] = []
-			self.results[results][domain].append(result)
+		self.results[domain].append(result)
 			
 		
 		

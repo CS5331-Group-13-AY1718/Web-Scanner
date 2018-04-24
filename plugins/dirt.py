@@ -28,7 +28,7 @@ class DirectoryTraversal(object):
 					for i in xrange(7):
 						payload_string = '/' + (i*up) + payload
 						if self.query:
-							req = requests.post(self.partial_path + "?" + self.query.split('=')[0] + '=' + payload_string)
+							req = requests.post(self.partial_path + "?" + self.path + self.query.split('=')[0] + '=' + payload_string)
 						else:
 							req = requests.post(self.url + payload_string)
 						if string in req.text:

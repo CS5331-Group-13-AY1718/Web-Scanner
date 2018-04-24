@@ -57,6 +57,8 @@ DOWNLOAD_HANDLERS = {'s3': None}
 #    'crawler.middlewares.CrawlerDownloaderMiddleware': 543,
 #}
 
+DOWNLOADER_MIDDLEWARE = [ 'scrapy.contrib.downloadermiddleware.httpauth.HttpAuthMiddleware']
+
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {

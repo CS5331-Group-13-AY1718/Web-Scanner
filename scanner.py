@@ -2,7 +2,7 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from crawler.spiders import linkcrawlerspider
 from urlparse import urlparse
-from plugins import dirt, ci, sqli, or
+from plugins import dirt, ci, sqli, openr
 import argparse
 import scrapy
 import os.path
@@ -101,7 +101,7 @@ def scan(targets):
 			
 			or_results = or.OpenRedirect(url).scan()
 			if or_results is not None:
-				or_vuln.append(or_results)
+				openr_vuln.append(or_results)
 	
 	results = (dt_vuln, ci_vuln, sqli_vuln, or_vuln)
 	generate_json_report(results)

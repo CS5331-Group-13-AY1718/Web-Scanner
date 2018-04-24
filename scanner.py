@@ -99,7 +99,7 @@ def scan(targets):
 			if sqli_results is not None:
 				sqli_vuln.append(sqli_results)
 			
-			or_results = or.OpenRedirect(url).scan()
+			or_results = openr.OpenRedirect(url).scan()
 			if or_results is not None:
 				openr_vuln.append(or_results)
 	
